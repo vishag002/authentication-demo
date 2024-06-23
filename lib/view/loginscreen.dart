@@ -36,90 +36,103 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /* appBar: AppBar(
         title: Text("Login Screen"),
         centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: emailController,
-              decoration: InputDecoration(hintText: "email"),
-            ),
-            SizedBox(height: 30),
-            TextFormField(
-              controller: passController,
-              decoration: InputDecoration(hintText: "password"),
-            ),
-            SizedBox(height: 50),
-            Center(
-              child: TextButton(
-                  onPressed: () {
-                    signIn();
-                  },
-                  style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.orange)),
-                  child: Text(
-                    "  login  ",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+      ), */
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 200,
+            width: double.infinity,
+            color: Colors.amber,
+            child: Stack(
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisterScreen(),
-                        ));
-                  },
-                  child: Text(
-                    "New User?",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 15,
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.blue,
-                    ),
+                Positioned(
+                  left: -110,
+                  top: -50,
+                  child: CircleAvatar(
+                    radius: 120,
+                    backgroundColor: Colors.blue.shade900,
+                  ),
+                ),
+                Positioned(
+                  left: 70,
+                  top: -150,
+                  child: CircleAvatar(
+                    radius: 120,
+                    backgroundColor: Colors.blue.shade900,
                   ),
                 )
               ],
             ),
-            SizedBox(height: 5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Get.to(ForgotPass());
-                    /* Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ForgotPass(),
-                        )); */
-                  },
-                  child: Text(
-                    "forgot password?",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 15,
-                      decoration: TextDecoration.underline,
-                      decorationColor: Colors.blue,
-                    ),
+          ),
+          SizedBox(height: 30),
+          Center(
+            child: Text(
+              "Login",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 40,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Stack(
+            children: [
+              Container(
+                // height: 150,
+                width: 320,
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple[100],
+                  borderRadius: BorderRadius.horizontal(
+                    right: Radius.circular(100),
                   ),
-                )
-              ],
-            )
-          ],
-        ),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          border: InputBorder.none,
+                          hintText: "email",
+                          icon: Icon(Icons.email),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Divider(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: TextFormField(
+                        controller: passController,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          border: InputBorder.none,
+                          hintText: "password",
+                          icon: Icon(Icons.lock),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                  right: -5,
+                  top: 45,
+                  child: CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.blue,
+                  ))
+            ],
+          )
+        ],
       ),
     );
   }
