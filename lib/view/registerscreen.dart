@@ -21,7 +21,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final ageController = TextEditingController();
 
   signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passController.text.trim(),
+      );
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'name': nameController.text.trim(),
+        'age': int.parse(ageController.text.trim()),
+      });
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
+    /* await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text, password: passController.text);
 
     /* addUserDetails(nameController.text, int.parse(ageController.text),
@@ -31,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'name': nameController.text,
       'age': int.parse(ageController.text),
       'email': emailController.text,
-    });
+    }); */
 
     Get.offAll(Initialscreen());
     Get.snackbar(
